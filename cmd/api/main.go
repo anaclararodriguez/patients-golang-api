@@ -1,10 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"patients-golang-api/internal/handler"
 )
 
 func main() {
 
-	fmt.Println("HI !")
+	server := handler.NewServer("8080")
+	server.Start()
 }
