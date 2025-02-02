@@ -27,9 +27,9 @@ func (s *Server) setupRoutes() {
 	api := s.Router.PathPrefix("/").Subrouter()
 
 	api.Handle("/", http.HandlerFunc(RootHandler))
-	api.Handle("/{anything:.*}", http.HandlerFunc(InvalidPathHandler))
-	api.Handle("/patients", http.HandlerFunc(GetPatients))
+	api.Handle("/patients", http.HandlerFunc(GetPatients)).Methods("GET")
 	api.Handle("/patients", http.HandlerFunc(CreatePatient)).Methods("POST")
+	api.Handle("/{anything:.*}", http.HandlerFunc(InvalidPathHandler))
 
 }
 
