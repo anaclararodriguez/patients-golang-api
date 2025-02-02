@@ -28,6 +28,8 @@ func (s *Server) setupRoutes() {
 
 	api.Handle("/", http.HandlerFunc(RootHandler))
 	api.Handle("/{anything:.*}", http.HandlerFunc(InvalidPathHandler))
+	api.Handle("/patients", http.HandlerFunc(GetPatients))
+	api.Handle("/patients", http.HandlerFunc(CreatePatient)).Methods("POST")
 
 }
 
