@@ -13,11 +13,12 @@ import (
 func ValidatePatient(p model.Patient) error {
 	p.Name = strings.TrimSpace(p.Name)
 	p.Email = strings.TrimSpace(p.Email)
-	p.PhoneNumber = strings.TrimSpace(p.PhoneNumber)
+	p.Address = strings.TrimSpace(p.Address)
+	p.ContactNumber = strings.TrimSpace(p.ContactNumber)
 	p.DocumentPhoto = strings.TrimSpace(p.DocumentPhoto)
 
-	if p.Name == "" || p.Email == "" || p.PhoneNumber == "" {
-		return fmt.Errorf("All fields (FirstName, LastName, Email, Document photo) are required")
+	if p.Name == "" || p.Email == "" || p.Address == "" || p.ContactNumber == "" || p.DocumentPhoto == "" {
+		return fmt.Errorf("All fields (Name, Email, Contact number, Document photo) are required")
 	}
 
 	emailRegex := `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
@@ -26,11 +27,9 @@ func ValidatePatient(p model.Patient) error {
 	}
 
 	phoneRegex := `^\d{7,15}$`
-	if !regexp.MustCompile(phoneRegex).MatchString(p.PhoneNumber) {
+	if !regexp.MustCompile(phoneRegex).MatchString(p.ContactNumber) {
 		return fmt.Errorf("Invalid phone number")
 	}
-
-	// TODO: validate photo
 
 	return nil
 }

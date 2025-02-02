@@ -11,6 +11,6 @@ type Patient struct {
 	Name          string
 	Email         string
 	Address       string
-	PhoneNumber   string
+	ContactNumber string
 	DocumentPhoto string
 }
