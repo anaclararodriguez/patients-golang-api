@@ -17,8 +17,7 @@ func LoadConfig() (*model.Config, error) {
 		log.Fatalf("Error getting wrking directory: %v", err)
 	}
 
-	dir := filepath.Dir(f)
-	envPath := filepath.Join(dir, "../.env")
+	envPath := filepath.Join(f, ".env")
 	err = godotenv.Load(envPath)
 	if err != nil {
 		return nil, err

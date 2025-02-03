@@ -7,6 +7,8 @@ RUN go mod tidy
 
 COPY . .
 
+COPY .env .env
+
 RUN go build -o patients-golang-api ./cmd/api/main.go
 
 EXPOSE 8080
