@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "bd8a72d0-7a24-464a-911d-823e3e5a992c",
+		"name": "patients-golang-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5329237"
+	},
+	"item": [
+		{
+			"name": "Root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASEURL}}:{{PORT}}",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"port": "{{PORT}}"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASEURL}}:{{PORT}}/patients",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"Name\": \"Phoebe Buffay\",\r\n    \"Email\": \"phoebe.buffay@example.com\",\r\n    \"Address\": \"90 Bedford St, New York\",\r\n    \"ContactNumber\": \"584267882169\",\r\n    \"DocumentPhoto\": \"http://example.com/photo_phoebe.jpg\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASEURL}}:{{PORT}}/patients",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid endpoint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASEURL}}:{{PORT}}/patientss",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"patientss"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASEURL",
+			"value": "http://localhost",
+			"type": "string"
+		},
+		{
+			"key": "PORT",
+			"value": "8080",
+			"type": "string"
+		}
+	]
+}
