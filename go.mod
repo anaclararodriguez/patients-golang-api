@@ -1,10 +1,11 @@
 module patients-golang-api
 
-go 1.23.5
+go 1.20
 
 require (
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/gorilla/mux v1.8.1
+	github.com/joho/godotenv v1.5.1
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 )
 

@@ -10,9 +10,11 @@ import (
 
 var DB *sql.DB
 
-func ConnectDB() error {
+func ConnectDB(config model.Config) error {
 	var err error
-	dsn := ""
+
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", config.MysqlUser, config.MysqlPassword, config.MysqlHost, config.MysqlPort, config.MysqlDb)
+	fmt.Println(dsn)
 	DB, err = sql.Open("mysql", dsn)
 	if err != nil {
 		return fmt.Errorf("error connecting to database: %w", err)

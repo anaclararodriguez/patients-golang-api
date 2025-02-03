@@ -14,3 +14,11 @@ type Patient struct {
 	ContactNumber string
 	DocumentPhoto string
 }
+
+type Config struct {
+	MysqlPassword string
+	MysqlUser     string
+	MysqlHost     string
+	MysqlPort     string
+	MysqlDb       string
+}
