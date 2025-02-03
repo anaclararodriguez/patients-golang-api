@@ -5,10 +5,10 @@ services:
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: patients
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: password
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     networks:
@@ -25,8 +25,8 @@ services:
       - db
     environment:
       DATABASE_HOST: db
-      DATABASE_USER: admin
-      DATABASE_PASSWORD: password
+      DATABASE_USER: ${MYSQL_USER}
+      DATABASE_PASSWORD: ${MYSQL_PASSWORD}
       DATABASE_NAME: patients
     ports:
       - "8080:8080"
@@ -41,3 +41,4 @@ networks:
 volumes:
   mysql_data:
     driver: local
+    
