@@ -24,12 +24,7 @@ type Notifier interface {
 
 func (e *EmailNotifier) SetConfig(configs ...interface{}) error {
 	conf := config.GetConfig()
-	if len(configs) != 4 {
-		return fmt.Errorf("invalid number of parameters for email config, expected 4 but got %d", len(configs))
-	}
-
 	e.FromAddress = conf.FromAddress
-
 	e.SMTPServer = conf.SmtpServer
 
 	var err error
@@ -45,12 +40,12 @@ func (e *EmailNotifier) SetConfig(configs ...interface{}) error {
 	return nil
 }
 
-func (e *EmailNotifier) Send(recipient string, message string) error {
+func (e *EmailNotifier) Send(recipient string, name string) error {
 	mail := gomail.NewMessage()
 	mail.SetHeader("From", e.FromAddress)
 	mail.SetHeader("To", recipient)
 	mail.SetHeader("Subject", "Patient Registration Confirmation")
-	mail.SetBody("text/plain", message)
+	mail.SetBody("text/plain", fmt.Sprintf("Hello %s,\n\nYour registration was successful!", name))
 
 	dialer := gomail.NewDialer(e.SMTPServer, e.SMTPPort, e.SMTPUser, e.SMTPPass)
 	if err := dialer.DialAndSend(mail); err != nil {
