@@ -1,9 +1,15 @@
 package db
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
+	"log"
+	"os"
+	"os/signal"
 	"patients-golang-api/internal/model"
+	"syscall"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -18,12 +24,28 @@ func ConnectDB(config model.Config) error {
 	if err != nil {
 		return fmt.Errorf("error connecting to database: %w", err)
 	}
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
 
-	if err = DB.Ping(); err != nil {
+	if err := DB.PingContext(ctx); err != nil {
 		return fmt.Errorf("error verifying database connection: %w", err)
 	}
 
 	fmt.Println("Connected to MySQL successfully")
+
+	go func() {
+		signalChan := make(chan os.Signal, 1)
+		signal.Notify(signalChan, os.Interrupt, syscall.SIGTERM)
+
+		<-signalChan
+		log.Println("Received shutdown signal, closing database connection...")
+
+		if err := DB.Close(); err != nil {
+			log.Printf("Error closing database connection: %v", err)
+		}
+
+		os.Exit(0)
+	}()
 	return nil
 }
 
