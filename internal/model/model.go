@@ -21,4 +21,10 @@ type Config struct {
 	MysqlHost     string
 	MysqlPort     string
 	MysqlDb       string
+	ServerPort    string
+	FromAddress   string
+	SmtpServer    string
+	SmtpPort      string
+	SmtpUser      string
+	SmtpPass      string
 }

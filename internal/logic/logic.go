@@ -2,12 +2,9 @@ package logic
 
 import (
 	"fmt"
-	"log"
 	"patients-golang-api/internal/model"
 	"regexp"
 	"strings"
-
-	"gopkg.in/gomail.v2"
 )
 
 func ValidatePatient(p model.Patient) error {
@@ -32,18 +29,4 @@ func ValidatePatient(p model.Patient) error {
 	}
 
 	return nil
-}
-
-func SendConfirmationEmail(email, name string) {
-	mail := gomail.NewMessage()
-	mail.SetHeader("From", "justanemail726@gmail.com")
-	mail.SetHeader("To", email)
-	mail.SetHeader("Subject", "Patient Registration Confirmation")
-	mail.SetBody("text/plain", fmt.Sprintf("Hello %s,\n\nYour registration was successful!", name))
-
-	dialer := gomail.NewDialer("smtp.gmail.com", 587, "justanemail726@gmail.com", "vfpp fmpw vehi zamd")
-
-	if err := dialer.DialAndSend(mail); err != nil {
-		log.Println("Failed to send email:", err)
-	}
 }
