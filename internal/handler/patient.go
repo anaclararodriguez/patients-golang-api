@@ -36,7 +36,7 @@ func CreatePatient(w http.ResponseWriter, r *http.Request) {
 		sendResponse(w, StatusError, "Failed to create patient", nil, err)
 		return
 	}
-	emailNotifier := &EmailNotifier{}
+	emailNotifier := &logic.EmailNotifier{}
 	emailNotifier.SetConfig()
 	go emailNotifier.Send(patient.Email, patient.Name)
 
